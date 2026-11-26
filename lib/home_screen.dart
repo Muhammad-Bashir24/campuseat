@@ -9,8 +9,12 @@ class AppColors {
   static const Color secondaryDark = Color(0xFF875200);
   static const Color neutralPrimary = Color(0xFF1A1A1A); // Deep charcoal
   static const Color neutralSecondary = Color(0xFF6E7682); // Slate gray
-  static const Color surfaceCanvas = Color(0xFFFCF9F8); // Gentle low-glare backdrop
-  static const Color surfaceLayer = Color(0xFFFFFFFF); // Pure white card surface
+  static const Color surfaceCanvas = Color(
+    0xFFFCF9F8,
+  ); // Gentle low-glare backdrop
+  static const Color surfaceLayer = Color(
+    0xFFFFFFFF,
+  ); // Pure white card surface
   static const Color surfaceContainerLow = Color(0xFFF6F3F2);
   static const Color surfaceContainer = Color(0xFFF0EDED);
   static const Color border = Color(0xFFF0F2F5);
@@ -25,11 +29,7 @@ class CategoryItem {
   final String emoji;
   final IconData? icon;
 
-  const CategoryItem({
-    required this.title,
-    this.emoji = '',
-    this.icon,
-  });
+  const CategoryItem({required this.title, this.emoji = '', this.icon});
 }
 
 /// Data model for restaurant entries
@@ -233,10 +233,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.school_rounded,
-              color: Colors.white,
-              size: 22,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Icon(
+                  Icons.school_rounded,
+                  color: Colors.white,
+                  size: 22,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 10),
@@ -316,11 +323,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       clipBehavior: Clip.antiAlias,
       // TODO: Replace with Image.asset('assets/avatar.png') or Image.network(...)
-      child: const Icon(
-        Icons.person_rounded,
-        size: 24,
-        color: AppColors.neutralSecondary,
-      ),
+      child: Image.asset('assets/images/avatar.jpg', fit: BoxFit.cover),
+      // child: const Icon(
+      //   Icons.person_rounded,
+      //   size: 24,
+      //   color: AppColors.neutralSecondary,
+      // ),
     );
   }
 
@@ -528,10 +536,7 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFFE24312),
-              Color(0xFF8F1D00),
-            ],
+            colors: [Color(0xFFE24312), Color(0xFF8F1D00)],
           ),
           boxShadow: [
             BoxShadow(
@@ -642,10 +647,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(width: 10),
             // Right Side Meal Box Image Placeholder
-            Expanded(
-              flex: 9,
-              child: _buildPromoImagePlaceholder(),
-            ),
+            Expanded(flex: 9, child: _buildPromoImagePlaceholder()),
           ],
         ),
       ),
@@ -666,38 +668,39 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       clipBehavior: Clip.antiAlias,
       // TODO: Replace with Image.asset('assets/promo_box.png') or Image.network(...)
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.takeout_dining_rounded,
-                color: Colors.white.withValues(alpha: 0.85),
-                size: 38,
-              ),
-              const SizedBox(height: 6),
-              Text(
-                'Meal Box',
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Text(
-                '[Image Placeholder]',
-                style: GoogleFonts.plusJakartaSans(
-                  color: Colors.white.withValues(alpha: 0.7),
-                  fontSize: 9,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+      child: Image.asset('assets/images/promo_box.jpg', fit: BoxFit.cover),
+      // child: Stack(
+      //   alignment: Alignment.center,
+      //   children: [
+      //     Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Icon(
+      //           Icons.takeout_dining_rounded,
+      //           color: Colors.white.withValues(alpha: 0.85),
+      //           size: 38,
+      //         ),
+      //         const SizedBox(height: 6),
+      //         Text(
+      //           'Meal Box',
+      //           style: GoogleFonts.plusJakartaSans(
+      //             color: Colors.white,
+      //             fontSize: 11,
+      //             fontWeight: FontWeight.w700,
+      //           ),
+      //         ),
+      //         Text(
+      //           '[Image Placeholder]',
+      //           style: GoogleFonts.plusJakartaSans(
+      //             color: Colors.white.withValues(alpha: 0.7),
+      //             fontSize: 9,
+      //             fontWeight: FontWeight.w500,
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ],
+      // ),
     );
   }
 
@@ -778,7 +781,9 @@ class _HomeScreenState extends State<HomeScreen> {
           color: isSelected ? AppColors.neutralPrimary : AppColors.surfaceLayer,
           borderRadius: BorderRadius.circular(9999),
           border: Border.all(
-            color: isSelected ? AppColors.neutralPrimary : AppColors.borderDivider,
+            color: isSelected
+                ? AppColors.neutralPrimary
+                : AppColors.borderDivider,
             width: 1,
           ),
           boxShadow: isSelected
@@ -802,10 +807,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(width: 6),
             ] else if (category.emoji.isNotEmpty) ...[
-              Text(
-                category.emoji,
-                style: const TextStyle(fontSize: 15),
-              ),
+              Text(category.emoji, style: const TextStyle(fontSize: 15)),
               const SizedBox(width: 6),
             ],
             Text(
@@ -1059,46 +1061,50 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 175,
         width: double.infinity,
         color: AppColors.surfaceContainer,
-        // TODO: Replace this placeholder container with Image.asset(...) or Image.network(...)
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.8),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.restaurant_menu_rounded,
-                    color: AppColors.neutralSecondary,
-                    size: 28,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '$restaurantName Photo',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.neutralSecondary,
-                  ),
-                ),
-                Text(
-                  '[Replace with Image]',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.neutralSecondary.withValues(alpha: 0.7),
-                  ),
-                ),
-              ],
-            ),
-          ],
+        child: Image.asset(
+          'assets/images/chicken_republic_dish.jpg',
+          fit: BoxFit.cover,
         ),
+        // TODO: Replace this placeholder container with Image.asset(...) or Image.network(...)
+        // child: Stack(
+        //   alignment: Alignment.center,
+        //   children: [
+        //     Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Container(
+        //           padding: const EdgeInsets.all(12),
+        //           decoration: BoxDecoration(
+        //             color: Colors.white.withValues(alpha: 0.8),
+        //             shape: BoxShape.circle,
+        //           ),
+        //           child: const Icon(
+        //             Icons.restaurant_menu_rounded,
+        //             color: AppColors.neutralSecondary,
+        //             size: 28,
+        //           ),
+        //         ),
+        //         const SizedBox(height: 8),
+        //         Text(
+        //           '$restaurantName Photo',
+        //           style: GoogleFonts.plusJakartaSans(
+        //             fontSize: 13,
+        //             fontWeight: FontWeight.w600,
+        //             color: AppColors.neutralSecondary,
+        //           ),
+        //         ),
+        //         Text(
+        //           '[Replace with Image]',
+        //           style: GoogleFonts.plusJakartaSans(
+        //             fontSize: 11,
+        //             fontWeight: FontWeight.w500,
+        //             color: AppColors.neutralSecondary.withValues(alpha: 0.7),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
@@ -1124,11 +1130,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.star_rounded,
-            color: AppColors.secondary,
-            size: 15,
-          ),
+          const Icon(Icons.star_rounded, color: AppColors.secondary, size: 15),
           const SizedBox(width: 3),
           Text(
             rating.toStringAsFixed(1),
@@ -1207,11 +1209,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[
-            Icon(
-              icon,
-              size: 13,
-              color: textColor,
-            ),
+            Icon(icon, size: 13, color: textColor),
             const SizedBox(width: 4),
           ],
           Text(
@@ -1388,11 +1386,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Icon(
-                  icon,
-                  color: color,
-                  size: 24,
-                ),
+                Icon(icon, color: color, size: 24),
                 if (badgeCount != null)
                   Positioned(
                     top: -4,
