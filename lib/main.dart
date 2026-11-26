@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
+import 'splash_screen.dart';
 
 void main() {
   runApp(const CampusEatApp());
@@ -27,7 +28,7 @@ class CampusEatApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }
